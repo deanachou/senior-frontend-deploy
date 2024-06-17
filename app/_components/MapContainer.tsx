@@ -86,20 +86,24 @@ function MapInner() {
 
   // USE EFFECT
   useEffect(() => {
+    console.log("useEffect user");
     user ? void handleFetchPoiByUid() : void handleFetchPoiByAnonymous();
     void handleFetchFilters();
   }, [user]);
 
   useEffect(() => {
+    console.log("useEffect tracking pin");
     console.log(importantPinContext?.trackingPin);
   }, [importantPinContext?.trackingPin]);
 
   useEffect(() => {
+    console.log("useEffect closestNotCompletedPin, userCoords");
     if (!closestNotCompletedPin || !userCoordinates) return;
     handleDistanceToClosestPin(userCoordinates, closestNotCompletedPin);
   }, [closestNotCompletedPin, userCoordinates]);
 
   useEffect(() => {
+    console.log("useEffect guessedPin");
     if (!importantPinContext?.guessedPin) {
       setUserGuessCoord(null);
     }
@@ -110,6 +114,7 @@ function MapInner() {
 
   //on load, or refresh
   useEffect(() => {
+    console.log("useEffect mount");
     const savedLevelAndXp = localStorage.getItem("levelAndXp");
     if (savedLevelAndXp) {
       setLevelAndXp(JSON.parse(savedLevelAndXp) as levelAndXp);
@@ -120,6 +125,7 @@ function MapInner() {
 
   //on guess
   useEffect(() => {
+    console.log("useEffect checklevel");
     void handleLevelAndXp();
   }, [checkLevel]);
 
